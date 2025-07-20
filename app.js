@@ -7,18 +7,18 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-// 🔌 MongoDB connection
+//  MongoDB connection
 mongoose.connect('mongodb://localhost:27017/jobtracker', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// 🔧 Middleware setup
+//  Middleware setup
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// 🔐 Session middleware (IMPORTANT: put before routes)
+//  Session middleware (IMPORTANT: put before routes)
 app.use(
   session({
     secret: 'secretkey123', // use env var in production
@@ -27,10 +27,10 @@ app.use(
   })
 );
 
-// 👤 Auth routes (login/register)
+//  Auth routes (login/register)
 app.use(authRoutes);
 
-// 🔒 Protect job routes: check login before accessing
+//  Protect job routes: check login before accessing
 app.use((req, res, next) => {
   const publicPaths = ['/login', '/register'];
   if (!req.session.userId && !publicPaths.includes(req.path)) {
@@ -39,10 +39,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// 📄 Job Routes (after auth & protection)
+//  Job Routes (after auth & protection)
 app.use('/', jobRoutes);
 
-// 🚀 Server start
+//  Server start
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000');
 });
