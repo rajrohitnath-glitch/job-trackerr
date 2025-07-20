@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Tracker</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <p style="text-align: right;">
+    <a href="/logout" style="color: red;">Logout</a>
+  </p>
+
+  <h1>🗂️ Job Tracker</h1>
+  <h2>Add a New Job</h2>
+  <form action="/add" method="POST" enctype="multipart/form-data">
+    <input name="company" placeholder="Company" required>
+    <input name="position" placeholder="Position" required>
+    <input name="deadline" type="date" required>
+    <input name="link" placeholder="Link" required>
+    <select name="category">
+      <option>Full-time</option>
+      <option>Part-time</option>
+      <option>Internship</option>
+    </select>
+    <input type="file" name="cv">
+    <button>Add Job</button>
+  </form>
+
+  <h2>Saved Jobs</h2>
+  <% jobs.forEach(job => { %>
+  <div class="saved-job">
+    <p><strong><%= job.position %></strong> at <%= job.company %></p>
+    <p>Category: <%= job.category %></p>
+    <p>Deadline: <%= job.deadline.toDateString() %></p>
+    <a href="<%= job.link %>" target="_blank">View Link</a>
+    <% if (job.cvPath) { %>
+      <a href="/<%= job.cvPath %>" target="_blank">CV</a>
+    <% } %>
+    <br>
+    <a href="/delete/<%= job._id %>"><button>Delete</button></a>
+  </div>
+<% }) %>
+</body>
+</html>
