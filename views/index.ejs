@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Job Tracker</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <h1>🗂️ Job Tracker</h1>
+    <div class="topbar-actions">
+      <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+  </div>
+
+  <section class="card">
+    <h2>Add a New Job</h2>
+    <form action="/add" method="POST" enctype="multipart/form-data" class="grid">
+      <label>
+        Company
+        <input name="company" placeholder="Company" required>
+      </label>
+      <label>
+        Position
+        <input name="position" placeholder="Position" required>
+      </label>
+      <label>
+        Deadline
+        <input type="date" name="deadline">
+      </label>
+      <label>
+        Link
+        <input name="link" placeholder="https://...">
+      </label>
+      <label>
+        Category
+        <select name="category" required>
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>
+          <option value="Internship">Internship</option>
+        </select>
+      </label>
+      <label>
+        Status
+        <select name="status">
+          <option value="Applied">Applied</option>
+          <option value="Interview">Interview</option>
+          <option value="Follow-up">Follow-up</option>
+        </select>
+      </label>
+      <label>
+        CV (PDF)
+        <input type="file" name="cv" accept=".pdf,.doc,.docx">
+      </label>
+      <div class="actions">
+        <button type="submit">Add Job</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="list">
+    <h2>Saved Applications</h2>
+    <% if (!jobs || jobs.length === 0) { %>
+      <p>No jobs yet. Add one above.</p>
+    <% } %>
+
+    <% jobs && jobs.forEach(job => { %>
+      <div class="saved-job card">
+        <div class="row">
+          <div class="col">
+            <p class="title"><strong><%= job.position %></strong> at <%= job.company %></p>
+            <p>Category: <%= job.category %></p>
+            <% if (job.deadline) { %>
+              <p>Deadline: <%= new Date(job.deadline).toDateString() %></p>
+            <% } %>
+            <p>
+              <% let statusClass = 'applied'; 
+                 if (job.status === 'Interview') statusClass = 'interview';
+                 if (job.status === 'Follow-up') statusClass = 'follow-up'; %>
+              <span class="badge status-<%= statusClass %>"><%= job.status %></span>
+            </p>
+            <p>
+              <a href="<%= job.link %>" target="_blank">Job Link</a>
+              <% if (job.cvPath) { %> · <a href="/<%= job.cvPath %>" target="_blank">CV</a> <% } %>
+            </p>
+          </div>
+          <div class="col align-right">
+            <a href="/delete/<%= job._id %>" class="danger-btn">Delete</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <details>
+              <summary>History / Timeline</summary>
+              <ul class="timeline">
+                <% (job.history || []).slice().reverse().forEach(h => { %>
+                  <li>
+                    <div><strong><%= h.status %></strong> — <%= h.note || 'No note' %></div>
+                    <div class="muted"><%= new Date(h.date).toLocaleString() %></div>
+                  </li>
+                <% }) %>
+              </ul>
+            </details>
+          </div>
+          <div class="col">
+            <form action="/jobs/<%= job._id %>/status" method="POST" class="status-form">
+              <label>Update Status
+                <select name="status">
+                  <option value="Applied" <%= job.status === 'Applied' ? 'selected' : '' %>>Applied</option>
+                  <option value="Interview" <%= job.status === 'Interview' ? 'selected' : '' %>>Interview</option>
+                  <option value="Follow-up" <%= job.status === 'Follow-up' ? 'selected' : '' %>>Follow-up</option>
+                </select>
+              </label>
+              <label>Note
+                <input name="note" placeholder="e.g., Sent follow-up email">
+              </label>
+              <button type="submit">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </section>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

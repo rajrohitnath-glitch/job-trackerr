@@ -1,0 +1,262 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #2563c1;
+  color: #333;
+  padding: 40px;
+  max-width: 800px;
+  margin: auto;
+  background: linear-gradient(to right, #ccefff, #e0f7fa);
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-top: 40px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+  align-items: center;
+}
+
+input, select, button {
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #bbb;
+}
+
+input[type="date"] {
+  padding: 6px 10px;
+}
+
+button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #2563eb;
+}
+
+.saved-job {
+  background: white;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.saved-job strong {
+  color: #1f2937;
+}
+
+.saved-job p {
+  margin: 5px 0;
+}
+
+.saved-job a {
+  color: #3b82f6;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.saved-job a:hover {
+  text-decoration: underline;
+}
+
+.saved-job button {
+  background-color: #ef4444;
+  margin-top: 5px;
+}
+
+.saved-job button:hover {
+  background-color: #d38210;
+}
+
+
+.auth-container {
+  max-width: 400px;
+  margin: 80px auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.auth-container h2 {
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.auth-container input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.auth-container button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.auth-container button:hover {
+  background-color: #2563eb;
+}
+
+.auth-container a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}
+
+.auth-container p {
+  margin-top: 15px;
+}
+
+
+.logout-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #ef4444;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: #dc2626;
+}
+
+
+
+/* === Added styles for status badges and timeline === */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.grid label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 6px;
+}
+
+.grid input, .grid select, .status-form input, .status-form select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.actions, .status-form {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+}
+
+button, .danger-btn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #2563eb;
+  color: #fff;
+  text-decoration: none;
+}
+
+.danger-btn {
+  background: #ef4444;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.col { flex: 1; min-width: 260px; }
+.align-right { text-align: right; }
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-applied { background: #e5f0ff; color: #1e40af; }
+.status-interview { background: #fff4e5; color: #a16207; }
+.status-follow-up { background: #e5fffa; color: #065f46; }
+
+.timeline {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.timeline li {
+  padding: 8px 0;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.timeline li:last-child { border-bottom: none; }
+
+.muted { color: #6b7280; font-size: 12px; }
+
+.logout-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #ef4444;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover { background-color: #dc2626; }
